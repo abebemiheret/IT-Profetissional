@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>የቤላ ጤና ጣቢያ የIT ባለሙያዎች መረጃ መሰብሰቢያ</title>
+    <!-- Google Fonts: Noto Sans Ethiopic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans Ethiopic', 'Segoe UI', Tahoma, Arial, sans-serif;
+        }
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f1f5f9; 
+            color: #1e293b; 
+        }
+        
+        /* 1. LOGIN SECTION */
+        .login-wrapper { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+                        url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-box { 
+            background: rgba(255, 255, 255, 0.96); 
+            padding: 40px 35px; 
+            border-radius: 18px; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+            width: 100%; 
+            max-width: 400px; 
+            text-align: center; 
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* LAPTOP ICON CONTAINER */
+        .login-icon {
+            width: 70px;
+            height: 70px;
+            background: #eff6ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px auto;
+            color: #2563eb;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+            border: 1px solid #dbeafe;
+        }
+
+        .login-box h3 { 
+            margin: 0 0 6px 0; 
+            color: #0f172a; 
+            font-size: 22px; 
+            font-weight: 800;
+        }
+
+        .login-box p {
+            margin: 0 0 25px 0;
+            color: #64748b;
+            font-size: 13.5px;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+
+        .login-box input { 
+            width: 100%; 
+            padding: 12px 14px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 8px; 
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input::-ms-reveal, input::-ms-clear { display: none; }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .login-box button.btn-login { 
+            width: 100%; 
+            padding: 12px; 
+            background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%);
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            font-size: 15px;
+            cursor: pointer; 
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .login-box button.btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .error-msg { color: #dc2626; font-size: 13px; display: none; margin-top: 12px; font-weight: 600; }
+
+        /* 2. MAIN DASHBOARD STYLES */
+        .container { 
+            max-width: 1100px; 
+            margin: 20px auto; 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            display: none; 
+        }
+
+        .welcome-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+            border-radius: 14px;
+            color: white;
+            padding: 22px 28px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.3);
+            gap: 20px;
+        }
+
+        .welcome-text h2 {
+            margin: 0 0 6px 0;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .welcome-text p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .welcome-img {
+            width: 150px;
+            height: 95px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+        }
+
+        .header-flex { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid #f1f5f9; 
+            padding-bottom: 15px; 
+            margin-bottom: 20px; 
+        }
+
+        .header-title h3 { margin: 0; color: #0f172a; font-size: 20px; font-weight: 700; }
+        .header-title p { margin: 4px 0 0 0; color: #64748b; font-size: 13px; }
+        
+        .nav-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e2e8f0; }
+        .tab-btn { 
+            padding: 12px 24px; 
+            background: #f8fafc; 
+            border: 1px solid #e2e8f0; 
+            border-bottom: none; 
+            border-top-left-radius: 8px; 
+            border-top-right-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            color: #64748b; 
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        .tab-btn.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 16px; 
+            margin-bottom: 25px; 
+            background: #f8fafc; 
+            padding: 20px; 
+            border-radius: 10px; 
+            border: 1px solid #e2e8f0; 
+        }
+
+        .field { display: flex; flex-direction: column; }
+        label { font-weight: 700; margin-bottom: 6px; font-size: 13px; color: #334155; }
+        input[type="text"], input[type="date"], select, textarea { 
+            padding: 10px 12px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 6px; 
+            font-size: 14px;
+            background-color: #fff;
+        }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 20px; font-size: 14px; }
+        th, td { border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left; }
+        th { background-color: #1e3a8a; color: white; font-weight: 700; }
+        
+        .section-title { 
+            background: #e2e8f0; 
+            padding: 10px 14px; 
+            font-weight: 700; 
+            border-radius: 6px; 
+            margin-top: 25px; 
+            margin-bottom: 12px; 
+            color: #0f172a; 
+            font-size: 15px;
+        }
+        
+        .dept-control { display: flex; gap: 10px; margin-bottom: 12px; background: #eff6ff; padding: 12px; border-radius: 8px; align-items: center; }
+        .dept-control input { flex-grow: 1; margin: 0; }
+        
+        .filter-bar { display: flex; gap: 15px; align-items: center; background: #f1f5f9; padding: 14px; border-radius: 8px; margin-bottom: 20px; }
+
+        /* BUTTON STYLES */
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 14px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-add { background-color: #2563eb; color: white; }
+        .btn-remove { background-color: #ef4444; color: white; padding: 5px 10px; font-size: 12px; border-radius: 4px; }
+        .btn-preview { background-color: #8b5cf6; color: white; box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3); }
+        .btn-print { background-color: #059669; color: white; }
+        .btn-excel { background-color: #16a34a; color: white; }
+        .btn-logout { background-color: #475569; color: white; }
+        .btn-save { background-color: #0284c7; color: white; }
+        .btn-container { text-align: center; margin-top: 25px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+        /* 3. REPORT PREVIEW MODAL (በሚያምር ቀለም የሚታይ ሪፖርት) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(6px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 850px;
+            max-height: 90vh;
+            border-radius: 16px;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+            animation: modalSlide 0.3s ease-out;
+            position: relative;
+        }
+
+        @keyframes modalSlide {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 { margin: 0; font-size: 20px; font-weight: 800; }
+        .close-modal { background: rgba(255,255,255,0.2); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; }
+        
+        .modal-body { padding: 25px; }
+
+        /* PREVIEW STYLING */
+        .preview-badge-green { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-size: 12px; }
+        .preview-badge-red { background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-size: 12px; }
+        .preview-badge-blue { background: #dbeafe; color: #1e40af; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-size: 12px; }
+
+        .info-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
+        .info-card-item { font-size: 13.5px; }
+        .info-card-item span { display: block; color: #64748b; font-size: 12px; font-weight: 600; }
+        .info-card-item strong { color: #0f172a; font-size: 15px; }
+
+        .report-section-head { font-size: 15px; font-weight: 800; color: #1e3a8a; border-left: 4px solid #2563eb; padding-left: 10px; margin: 20px 0 10px 0; }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container, .login-wrapper { display: none !important; }
+            .modal-overlay { display: block !important; position: static; background: none; backdrop-filter: none; padding: 0; }
+            .modal-card { max-width: 100%; box-shadow: none; border: none; }
+            .modal-header .close-modal, .modal-footer { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 1. LOGIN SECTION -->
+<div class="login-wrapper" id="loginSection">
+    <div class="login-box">
+        <!-- የላፕቶፕ አይከን (LAPTOP SCREEN ICON) -->
+        <div class="login-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0l1.28 2.55A1 1 0 0 1 20.38 20H3.62a1 1 0 0 1-.9-1.45L4 16"></path>
+            </svg>
+        </div>
+        <h3>ቤላ ጤና ጣቢያ</h3>
+        <p>የ IT ባለሙያዎች መረጃ መሰብሰቢያ</p>
+        
+        <div class="input-group">
+            <label>የተጠቃሚ ስም (Username)</label>
+            <input type="text" id="username" placeholder="IT" required autocomplete="off">
+        </div>
+        
+        <div class="input-group">
+            <label>የይለፍ ቃል (Password)</label>
+            <input type="password" id="password" placeholder="የይለፍ ቃል ያስገቡ" required autocomplete="new-password">
+        </div>
+
+        <button type="button" class="btn-login" onclick="login()">ወደ ሲስተሙ ግባ</button>
+        <div class="error-msg" id="errorMsg">የተጠቃሚ ስም ወይም የይለፍ ቃል ተሳስቷል!</div>
+    </div>
+</div>
+
+<!-- 2. MAIN DASHBOARD -->
+<div class="container" id="appSection">
+    
+    <!-- WELCOME HERO BANNER -->
+    <div class="welcome-hero">
+        <div class="welcome-text">
+            <h2>💻 እንኳን ደህና መጡ!</h2>
+            <p>ወደ ቤላ ጤና ጣቢያ የIT እና ሲስተም አስተዳደር መረጃ ማደራጃ ፖርታል በጥሩ ሁኔታ ገብተዋል።</p>
+        </div>
+        <div>
+            <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?auto=format&fit=crop&w=600&q=80" alt="Laptop Computer" class="welcome-img">
+        </div>
+    </div>
+
+    <div class="header-flex">
+        <div class="header-title">
+            <h3>የIT ባለሙያዎች ዕለታዊ መረጃ መዝገብ</h3>
+            <p>የእለት፣ የሳምንት እና የወር የICT ስራዎች ሪፖርት ማጠቃለያ</p>
+        </div>
+        <button class="btn btn-logout" onclick="logout()">ውጣ (Logout)</button>
+    </div>
+
+    <!-- TABS NAVIGATION -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('formTab', this)">+ አዲስ ሪፖርት መሙያ</button>
+        <button class="tab-btn" onclick="switchTab('historyTab', this)">📊 የሳምንት/የወር ሪፖርት ማጠቃለያ</button>
+    </div>
+
+    <!-- TAB 1: DAILY REPORT FORM -->
+    <div id="formTab" class="tab-content active">
+        <form id="reportForm">
+            <div class="form-grid">
+                <div class="field">
+                    <label>የባለሙያው ስም:</label>
+                    <input type="text" id="officerName" placeholder="ስም ያስገቡ" required>
+                </div>
+                <div class="field">
+                    <label>የስራ መደብ:</label>
+                    <input type="text" value="የ IT / ሲስተም አስተዳዳሪ" readonly>
+                </div>
+                <div class="field">
+                    <label>ቀን:</label>
+                    <input type="date" id="reportDate" required>
+                </div>
+                <div class="field">
+                    <label>የስራ ሰዓት:</label>
+                    <input type="text" id="workShift" placeholder="ምሳሌ፡ 2:00 - 11:00" required>
+                </div>
+            </div>
+
+            <!-- SECTION 1: SYSTEM CHECKLIST -->
+            <div class="section-title">1. የዕለታዊ የሲስተም እና መሰረተ-ልማት የቁጥጥር ዝርዝር (Daily Checklist)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">ተ.ቁ</th>
+                        <th style="width: 35%;">የፍተሻ አይነት</th>
+                        <th style="width: 25%;">ሁኔታ (Status)</th>
+                        <th style="width: 35%;">ማስታወሻ</th>
+                    </tr>
+                </thead>
+                <tbody id="checklistBody">
+                    <tr>
+                        <td>1</td>
+                        <td>የ EMR / የጤና መረጃ ሲስተም እና ሴርቨር</td>
+                        <td><select class="chk-status"><option>ይሰራል</option><option>ችግር አለበት</option><option>አልተፈተሸም</option></select></td>
+                        <td><input type="text" class="chk-remark" style="width:95%"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>የ LAN ኔትወርክ እና ስዊቾች</td>
+                        <td><select class="chk-status"><option>ይሰራል</option><option>ችግር አለበት</option><option>አልተፈተሸም</option></select></td>
+                        <td><input type="text" class="chk-remark" style="width:95%"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>የ CCTV ካሜራዎች እና NVR/DVR</td>
+                        <td><select class="chk-status"><option>ይሰራል</option><option>ችግር አለበት</option><option>አልተፈተሸም</option></select></td>
+                        <td><input type="text" class="chk-remark" style="width:95%"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>የዳታ ባክአፕ (Daily Data Backup)</td>
+                        <td><select class="chk-status"><option>ተከናወኗል</option><option>አልተከናወነም</option></select></td>
+                        <td><input type="text" class="chk-remark" style="width:95%"></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>የ UPS እና የሃይል አቅርቦት</td>
+                        <td><select class="chk-status"><option>ይሰራል</option><option>ችግር አለበት</option><option>አልተፈተሸም</option></select></td>
+                        <td><input type="text" class="chk-remark" style="width:95%"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- SECTION 2: DEPARTMENT SUPPORT LOG -->
+            <div class="section-title">2. የተከናወኑ የጥገና እና የተጠቃሚዎች ድጋፍ ስራዎች (Daily IT Support Log)</div>
+            
+            <div class="dept-control">
+                <input type="text" id="newDeptInput" placeholder="አዲስ ዲፓርትመንት ስም ያስገቡ...">
+                <button type="button" class="btn btn-add" onclick="addDepartment()">+ ዲፓርትመንት ጨምር</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 22%;">ዲፓርትመንት</th>
+                        <th style="width: 33%;">ያጋጠመው ችግር / የቀረበ ጥያቄ</th>
+                        <th style="width: 30%;">የተወሰደ እርምጃ / የተሰጠ መፍትሔ</th>
+                        <th style="width: 10%;">ሁኔታ</th>
+                        <th style="width: 5%;">ድርጊት</th>
+                    </tr>
+                </thead>
+                <tbody id="deptTableBody">
+                    <!-- Dynamically rendered departments -->
+                </tbody>
+            </table>
+
+            <!-- SECTION 3: PENDING ISSUES -->
+            <div class="section-title">3. ያልተጠናቀቁ ስራዎች እና ተጨማሪ ድጋፍ የሚሹ ጉዳዮች (Pending Issues)</div>
+            <textarea id="pendingIssues" rows="3" style="width: 100%; font-size: 14px;" placeholder="የቀሩ ወይም ያልተጠናቀቁ ጉዳዮች ካሉ እዚህ ይፃፉ..."></textarea>
+
+            <!-- CONTROL BUTTONS INCLUDING PREVIEW -->
+            <div class="btn-container">
+                <button type="button" class="btn btn-preview" onclick="previewCurrentForm()">👁️ ሪፖርት ማየት (Preview)</button>
+                <button type="button" class="btn btn-save" onclick="saveReportToDB()">💾 መረጃውን አስቀምጥ (Save)</button>
+                <button type="button" class="btn btn-print" onclick="window.print()">🖨️ ፕሪንት / PDF አውርድ</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- TAB 2: WEEKLY / MONTHLY HISTORY & EXPORT -->
+    <div id="historyTab" class="tab-content">
+        <div class="filter-bar">
+            <label><b>የሪፖርት ጊዜ መምረጫ:</b></label>
+            <select id="timeFilter" onchange="renderHistoryTable()">
+                <option value="all">ሁሉም የተቀመጡ ሪፖርቶች</option>
+                <option value="week">የዚህ ሳምንት (ባለፉት 7 ቀናት)</option>
+                <option value="month">የዚህ ወር (ባለፉት 30 ቀናት)</option>
+            </select>
+            <button type="button" class="btn btn-excel" onclick="exportToCSV()">📥 ወደ Excel (CSV) አውርድ</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ተ.ቁ</th>
+                    <th>ቀን</th>
+                    <th>የባለሙያ ስም</th>
+                    <th>የተሰራባቸው ዲፓርትመንቶች እና የተሰጡ መፍትሔዎች</th>
+                    <th>ያልተጠናቀቁ ጉዳዮች</th>
+                    <th>ድርጊት</th>
+                </tr>
+            </thead>
+            <tbody id="historyTableBody">
+                <!-- Dynamically rendered history -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 3. REPORT PREVIEW MODAL (በሚያምር ቀለም ሪፖርቱን ማሳያ) -->
+<div class="modal-overlay" id="reportModal">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3>📋 የቤላ ጤና ጣቢያ IT ስራዎች ሪፖርት ማሳያ</h3>
+            <button class="close-modal" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body" id="modalContent">
+            <!-- Dynamically Rendered Report Preview -->
+        </div>
+        <div class="btn-container" style="padding-bottom: 20px;">
+            <button class="btn btn-print" onclick="window.print()">🖨️ ሪፖርቱን ፕሪንት አድርግ</button>
+            <button class="btn btn-logout" onclick="closeModal()">ዝጋ</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const AUTH_USER = "IT";
+    const AUTH_PASS = "12345";
+
+    let departments = JSON.parse(localStorage.getItem('it_departments')) || [
+        "ፋይናንስ ክፍል",
+        "የተመላላሽ ህክምና ዲፓርትመንት",
+        "ፋርማሲ ዲፓርትመንት",
+        "ድንገተኛ ህክምና ዲፓርትመንት"
+    ];
+
+    let reportsDB = JSON.parse(localStorage.getItem('it_reports_db')) || [];
+
+    document.getElementById('reportDate').valueAsDate = new Date();
+
+    function login() {
+        const u = document.getElementById('username').value;
+        const p = document.getElementById('password').value;
+        const err = document.getElementById('errorMsg');
+
+        if (u === AUTH_USER && p === AUTH_PASS) {
+            err.style.display = 'none';
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('appSection').style.display = 'block';
+            renderDepartments();
+        } else {
+            err.style.display = 'block';
+        }
+    }
+
+    function logout() {
+        document.getElementById('appSection').style.display = 'none';
+        document.getElementById('loginSection').style.display = 'flex';
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }
+
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+
+        if (tabId === 'historyTab') {
+            renderHistoryTable();
+        }
+    }
+
+    function renderDepartments() {
+        const tbody = document.getElementById('deptTableBody');
+        tbody.innerHTML = '';
+        
+        departments.forEach((dept, index) => {
+            const row = document.createElement('tr');
+            row.className = "dept-row";
+            row.innerHTML = `
+                <td><b class="dept-name" style="color:#1e3a8a;">${dept}</b></td>
+                <td><textarea class="dept-issue" rows="2" style="width:95%" placeholder="ችግር ካለ ያስገቡ..."></textarea></td>
+                <td><textarea class="dept-action" rows="2" style="width:95%" placeholder="የተሰጠ መፍትሔ..."></textarea></td>
+                <td><select class="dept-status"><option value="ተጠናቋል">ተጠናቋል</option><option value="በሂደት ላይ">በሂደት ላይ</option></select></td>
+                <td><button type="button" class="btn btn-remove" onclick="removeDepartment(${index})">X</button></td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    function addDepartment() {
+        const input = document.getElementById('newDeptInput');
+        const deptName = input.value.trim();
+        
+        if (deptName !== '') {
+            departments.push(deptName);
+            localStorage.setItem('it_departments', JSON.stringify(departments));
+            renderDepartments();
+            input.value = '';
+        }
+    }
+
+    function removeDepartment(index) {
+        departments.splice(index, 1);
+        localStorage.setItem('it_departments', JSON.stringify(departments));
+        renderDepartments();
+    }
+
+    /* ሪፖርት ማየት (PREVIEW CURRENT FORM DATA) */
+    function previewCurrentForm() {
+        const officer = document.getElementById('officerName').value.trim() || "አልተጠቀሰም";
+        const date = document.getElementById('reportDate').value || "አልተጠቀሰም";
+        const shift = document.getElementById('workShift').value.trim() || "አልተጠቀሰም";
+        const pending = document.getElementById('pendingIssues').value.trim() || "ምንም የለም";
+
+        let checklistHTML = '';
+        const chkRows = document.querySelectorAll('#checklistBody tr');
+        chkRows.forEach((row, i) => {
+            const name = row.cells[1].innerText;
+            const status = row.querySelector('.chk-status').value;
+            const remark = row.querySelector('.chk-remark').value || '-';
+            
+            let statusBadge = `<span class="preview-badge-blue">${status}</span>`;
+            if (status === 'ይሰራል' || status === 'ተከናወኗል') statusBadge = `<span class="preview-badge-green">${status}</span>`;
+            if (status === 'ችግር አለበት' || status === 'አልተከናወነም') statusBadge = `<span class="preview-badge-red">${status}</span>`;
+
+            checklistHTML += `
+                <tr>
+                    <td>${i+1}</td>
+                    <td><b>${name}</b></td>
+                    <td>${statusBadge}</td>
+                    <td>${remark}</td>
+                </tr>`;
+        });
+
+        let deptLogsHTML = '';
+        document.querySelectorAll('#deptTableBody tr.dept-row').forEach(row => {
+            const dept = row.querySelector('.dept-name').innerText;
+            const issue = row.querySelector('.dept-issue').value || 'ምንም ችግር አልተመዘገበም';
+            const action = row.querySelector('.dept-action').value || 'የተወሰደ እርምጃ የለም';
+            const status = row.querySelector('.dept-status').value;
+
+            let stBadge = status === 'ተጠናቋል' ? `<span class="preview-badge-green">ተጠናቋል</span>` : `<span class="preview-badge-red">በሂደት ላይ</span>`;
+
+            deptLogsHTML += `
+                <tr>
+                    <td><b style="color:#1e3a8a;">${dept}</b></td>
+                    <td>${issue}</td>
+                    <td>${action}</td>
+                    <td>${stBadge}</td>
+                </tr>`;
+        });
+
+        const modalHTML = `
+            <div class="info-card-grid">
+                <div class="info-card-item"><span>የባለሙያ ስም</span><strong>${officer}</strong></div>
+                <div class="info-card-item"><span>ቀን</span><strong>${date}</strong></div>
+                <div class="info-card-item"><span>የስራ ሰዓት</span><strong>${shift}</strong></div>
+                <div class="info-card-item"><span>ተቋም</span><strong>ቤላ ጤና ጣቢያ</strong></div>
+            </div>
+
+            <div class="report-section-head">1. የሲስተም እና መሰረተ-ልማት የቁጥጥር ፍተሻ</div>
+            <table>
+                <thead>
+                    <tr><th>ተ.ቁ</th><th>የፍተሻ አይነት</th><th>ሁኔታ</th><th>ማስታወሻ</th></tr>
+                </thead>
+                <tbody>${checklistHTML}</tbody>
+            </table>
+
+            <div class="report-section-head">2. የተከናወኑ የጥገና እና ድጋፍ ስራዎች</div>
+            <table>
+                <thead>
+                    <tr><th>ዲፓርትመንት</th><th>ያጋጠመው ችግር</th><th>የተወሰደ እርምጃ</th><th>ሁኔታ</th></tr>
+                </thead>
+                <tbody>${deptLogsHTML}</tbody>
+            </table>
+
+            <div class="report-section-head">3. ያልተጠናቀቁ ጉዳዮች</div>
+            <div style="background:#fff1f2; border:1px solid #fecdd3; padding:12px; border-radius:8px; color:#9f1239; font-weight:600;">
+                ${pending}
+            </div>
+        `;
+
+        document.getElementById('modalContent').innerHTML = modalHTML;
+        document.getElementById('reportModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('reportModal').style.display = 'none';
+    }
+
+    function saveReportToDB() {
+        const officer = document.getElementById('officerName').value.trim();
+        const date = document.getElementById('reportDate').value;
+        const shift = document.getElementById('workShift').value.trim();
+        const pending = document.getElementById('pendingIssues').value.trim();
+
+        if (!officer || !date) {
+            alert("እባክዎን የባለሙያ ስም እና ቀን ይሙሉ!");
+            return;
+        }
+
+        const deptLogs = [];
+        document.querySelectorAll('#deptTableBody tr.dept-row').forEach(row => {
+            const dept = row.querySelector('.dept-name').innerText;
+            const issue = row.querySelector('.dept-issue').value;
+            const action = row.querySelector('.dept-action').value;
+            const status = row.querySelector('.dept-status').value;
+            if (issue || action) {
+                deptLogs.push({ dept, issue, action, status });
+            }
+        });
+
+        const reportData = {
+            id: Date.now(),
+            officer,
+            date,
+            shift,
+            pending,
+            logs: deptLogs
+        };
+
+        reportsDB.push(reportData);
+        localStorage.setItem('it_reports_db', JSON.stringify(reportsDB));
+        alert("የዕለቱ ሪፖርት በሲስተሙ ላይ በተሳካ ሁኔታ ተመዝግቧል!");
+    }
+
+    function renderHistoryTable() {
+        const tbody = document.getElementById('historyTableBody');
+        const filter = document.getElementById('timeFilter').value;
+        tbody.innerHTML = '';
+
+        const now = new Date();
+        let filteredReports = reportsDB.filter(r => {
+            const rDate = new Date(r.date);
+            if (filter === 'week') {
+                const diffTime = Math.abs(now - rDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays <= 7;
+            } else if (filter === 'month') {
+                const diffTime = Math.abs(now - rDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays <= 30;
+            }
+            return true;
+        });
+
+        if (filteredReports.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#64748b;">ምንም ተዛማጅ ሪፖርት አልተገኘም።</td></tr>';
+            return;
+        }
+
+        filteredReports.reverse().forEach((r, idx) => {
+            let logDetails = r.logs.map(l => `• <b>${l.dept}:</b> ${l.issue || 'ችግር የለም'} (${l.action || 'መፍትሔ የለም'}) - <span class="preview-badge-blue">${l.status}</span>`).join('<br>');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${idx + 1}</td>
+                <td><b>${r.date}</b></td>
+                <td>${r.officer}</td>
+                <td>${logDetails || 'ምንም ዝርዝር አልተመዘገበም'}</td>
+                <td>${r.pending || 'የለም'}</td>
+                <td>
+                    <button type="button" class="btn btn-preview" style="padding:4px 8px; font-size:12px;" onclick="viewSavedReport(${r.id})">👁️ ማየት</button>
+                    <button type="button" class="btn btn-remove" onclick="deleteReport(${r.id})">አጥፋ</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    function viewSavedReport(id) {
+        const r = reportsDB.find(item => item.id === id);
+        if (!r) return;
+
+        let deptLogsHTML = r.logs.map(l => `
+            <tr>
+                <td><b style="color:#1e3a8a;">${l.dept}</b></td>
+                <td>${l.issue || '-'}</td>
+                <td>${l.action || '-'}</td>
+                <td><span class="${l.status === 'ተጠናቋል' ? 'preview-badge-green' : 'preview-badge-red'}">${l.status}</span></td>
+            </tr>`).join('');
+
+        const modalHTML = `
+            <div class="info-card-grid">
+                <div class="info-card-item"><span>የባለሙያ ስም</span><strong>${r.officer}</strong></div>
+                <div class="info-card-item"><span>ቀን</span><strong>${r.date}</strong></div>
+                <div class="info-card-item"><span>የስራ ሰዓት</span><strong>${r.shift}</strong></div>
+                <div class="info-card-item"><span>ተቋም</span><strong>ቤላ ጤና ጣቢያ</strong></div>
+            </div>
+
+            <div class="report-section-head">የተከናወኑ የጥገና እና ድጋፍ ስራዎች</div>
+            <table>
+                <thead>
+                    <tr><th>ዲፓርትመንት</th><th>ያጋጠመው ችግር</th><th>የተወሰደ እርምጃ</th><th>ሁኔታ</th></tr>
+                </thead>
+                <tbody>${deptLogsHTML || '<tr><td colspan="4">ምንም ዝርዝር አልተመዘገበም</td></tr>'}</tbody>
+            </table>
+
+            <div class="report-section-head">ያልተጠናቀቁ ጉዳዮች</div>
+            <div style="background:#fff1f2; border:1px solid #fecdd3; padding:12px; border-radius:8px; color:#9f1239; font-weight:600;">
+                ${r.pending || 'ምንም ያልተጠናቀቀ ጉዳይ የለም'}
+            </div>
+        `;
+
+        document.getElementById('modalContent').innerHTML = modalHTML;
+        document.getElementById('reportModal').style.display = 'flex';
+    }
+
+    function deleteReport(id) {
+        if (confirm("ይህንን ሪፖርት እርግጠኛ ነዎት ማጥፋት ይፈልጋሉ?")) {
+            reportsDB = reportsDB.filter(r => r.id !== id);
+            localStorage.setItem('it_reports_db', JSON.stringify(reportsDB));
+            renderHistoryTable();
+        }
+    }
+
+    function exportToCSV() {
+        if (reportsDB.length === 0) {
+            alert("ምንም የተቀመጠ ሪፖርት የለም!");
+            return;
+        }
+
+        let csvContent = "\ufeff";
+        csvContent += "ቀን,የባለሙያ ስም,ስራ ሰዓት,ዲፓርትመንት,ያጋጠመው ችግር,የተወሰደ እርምጃ,ሁኔታ,ያልተጠናቀቁ ጉዳዮች\n";
+
+        reportsDB.forEach(r => {
+            if (r.logs.length === 0) {
+                csvContent += `"${r.date}","${r.officer}","${r.shift}","--","--","--","--","${(r.pending||'').replace(/"/g, '""')}"\n`;
+            } else {
+                r.logs.forEach(l => {
+                    csvContent += `"${r.date}","${r.officer}","${r.shift}","${l.dept}","${(l.issue||'').replace(/"/g, '""')}","${(l.action||'').replace(/"/g, '""')}","${l.status}","${(r.pending||'').replace(/"/g, '""')}"\n`;
+                });
+            }
+        });
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `Bela_Health_Center_IT_Report_${new Date().toISOString().slice(0,10)}.csv`;
+        link.click();
+    }
+</script>
+</body>
+</html>
